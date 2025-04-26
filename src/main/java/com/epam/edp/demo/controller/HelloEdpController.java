@@ -12,7 +12,7 @@ public class HelloEdpController {
     @GetMapping(value = "/api/hello")
     public String hello() {
         String hostname = System.getenv("HOSTNAME");
-        return "Hello, KubeRocketCI from " + hostname;
+        return "Hello, KubeRocketCI v2 from " + hostname;
     }
 
 
