@@ -33,7 +33,7 @@ A Helm chart for Kubernetes
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
 | ingress.dnsWildcard | string | `"development.krci-dev.cloudmentor.academy"` |  |
-| ingress.enabled | bool | `false` |  |
+| ingress.enabled | bool | `true` |  |
 | ingress.hosts[0].host | string | `"edpDefault"` |  |
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
@@ -46,7 +46,7 @@ A Helm chart for Kubernetes
 | podSecurityContext | object | `{}` |  |
 | readinessProbe.initialDelaySeconds | int | `20` |  |
 | readinessProbe.tcpSocket.port | string | `"http"` |  |
-| replicaCount | int | `1` |  |
+| replicaCount | int | `3` |  |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
 | service.port | int | `8080` |  |
