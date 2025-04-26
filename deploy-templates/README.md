@@ -58,3 +58,53 @@ A Helm chart for Kubernetes
 | tolerations | list | `[]` | https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/ |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
+
+
+This diagram illustrates the CI/CD workflow for performing a rolling update of a sample Java application using KubeRocketCI, Github, Tekton, Argo CD, and other integrated tools:
+
+Code Push to Github:
+
+The process starts with the student pushing code changes to the Github repository $<account_id>/springboot-rollout.
+This action triggers Github to generate an event.
+Event Trigger:
+
+The Github event triggers a series of automated processes within the KubeRocketCI platform.
+Review Pipeline:
+
+The event triggers the Review pipeline in KubeRocketCI, which is executed using Tekton.
+The review pipeline fetches the code from the Git Server and performs code review and quality checks using SonarQube.
+After successful completion, it passes the control to the Build Pipeline.
+Build Pipeline:
+
+The Build pipeline is responsible for compiling the code, running tests, and building the application artifact.
+The pipeline creates a container image of the application and pushes it to the AWS Elastic Container Registry (ECR).
+It also tags the Git repository to mark the successful build.
+Manual Trigger:
+
+A manual trigger is required to initiate the Deploy Pipeline.
+The student or an automated process can trigger the deployment.
+Deploy Pipeline:
+
+The Deploy Pipeline is responsible for deploying the application to the Kubernetes cluster in a Rolling Update strategy.
+It retrieves the container image from AWS ECR and deploys it to the specified deployment flow.
+Argo CD Integration:
+
+Argo CD manages the deployment process and ensures that the desired state of the application is maintained in the Kubernetes cluster.
+The deploy pipeline integrates with Argo CD to manage deployments and rollbacks.
+Dev Environment Deployment:
+
+The application is deployed to the Dev environment within the Kubernetes cluster.
+The deploy pipeline ensures that the application is running as a pod in the specified deployment flow.
+The Rolling Update strategy ensures that the updates are gradually applied to the pods, maintaining high availability and zero downtime.
+New Tool: Rollout Deployment
+One of Kubernetes' features is its ability to leverage various deployment strategies. One such strategy is the Rolling Update, which allows updates to be gradually released to pods in a deployment, ensuring no downtime and that the update process can be automatically rolled back if issues arise. This approach maintains high availability and ensures that updates do not disrupt the user experience. With KubeRocketCI, developers can configure and manage rolling updates, enforcing continuous deployment best practices in a Kubernetes environment.
+
+Task Goal
+The task goal is to perform a rolling update of a sample Java 17 application using KubeRocketCI, showcasing the platform's capabilities in achieving continuous deployment with zero downtime. To achieve this, you will practice updating a deployment on KubeRocketCI using a Rolling Update strategy.
+
+Naming Conventions
+Please adhere to the following naming conventions for the resources to ensure smooth task verification:
+
+Application: springboot-rollout
+Deployment Flow: rollout
+Environment: dev
